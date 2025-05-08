@@ -7,7 +7,8 @@
     <title>Vocabulary Learning Game</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
-        .description { margin: 5px 0; padding: 10px; border: 1px solid #ccc; cursor: pointer; }
+        .description { margin: 5px 0; padding: 10px; border: 1px solid #ccc; cursor: pointer; opacity: 0; transition: opacity 0.5s ease-in; }
+        .description.visible { opacity: 1; }
         .correct { background-color: #c8e6c9; }
         .wrong { background-color: #ffcdd2; }
         #score, #rounds-left { font-weight: bold; display: inline-block; margin-right: 20px; }
@@ -173,6 +174,14 @@
                 div.onclick = () => handleClick(div, desc, currentWord.description);
                 descriptionsDiv.appendChild(div);
             });
+
+            // Wait 3 seconds before showing descriptions
+            setTimeout(() => {
+                const descriptionElements = descriptionsDiv.getElementsByClassName('description');
+                for (let element of descriptionElements) {
+                    element.classList.add('visible');
+                }
+            }, 3000);
         }
 
         function handleClick(selectedDiv, selectedDesc, correctDesc) {
