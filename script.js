@@ -14,18 +14,18 @@ function startRound() {
     if (round >= maxRounds) {
         document.getElementById('game').style.display = 'none';
         document.getElementById('game-over').style.display = 'block';
-        document.getElementById('game-over').textContent = `Game Over! Your final score is ${score} out of ${maxRounds}.`;
+        document.getElementById('game-over').textContent = `המשחק נגמר! הציון הסופי שלך הוא ${score} מתוך ${maxRounds}.`;
         return;
     }
 
-    document.getElementById('score').textContent = `Score: ${score}`;
-    document.getElementById('rounds-left').textContent = `Rounds left: ${maxRounds - round}`;
+    document.getElementById('score').textContent = `${score} נקודות`;
+    document.getElementById('rounds-left').textContent = `עוד ${maxRounds - round} סיבובים`;
 
     // Select a random word
     const wordIndex = Math.floor(Math.random() * wordList.length);
     const currentWord = wordList[wordIndex];
     document.getElementById('word').textContent = currentWord.word;
-    document.getElementById('unit').textContent = `(from unit ${currentWord.unit})`;
+    document.getElementById('unit').textContent = `(מיחידה ${currentWord.unit})`;
 
     // Prepare descriptions: one correct + 9 random incorrect
     let descriptions = wordList.filter((_, i) => i !== wordIndex).map(item => item.description);
