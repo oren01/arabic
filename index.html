@@ -9,14 +9,17 @@
         .description { margin: 5px 0; padding: 10px; border: 1px solid #ccc; cursor: pointer; }
         .correct { background-color: #c8e6c9; }
         .wrong { background-color: #ffcdd2; }
-        #score { font-weight: bold; }
+        #score, #rounds-left { font-weight: bold; display: inline-block; margin-right: 20px; }
         #word { font-size: 24px; margin-bottom: 20px; }
         #game-over { font-size: 24px; color: #333; margin-top: 20px; }
     </style>
 </head>
 <body>
     <div id="game">
-        <div id="score">Score: 0</div>
+        <div>
+            <span id="score">Score: 0</span>
+            <span id="rounds-left">Rounds left: 30</span>
+        </div>
         <div id="word"></div>
         <div id="descriptions"></div>
     </div>
@@ -38,7 +41,7 @@
 
         let score = 0;
         let round = 0;
-        const maxRounds = 30;
+        const maxRounds = 10;
 
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -56,8 +59,8 @@
                 return;
             }
 
-            round++;
             document.getElementById('score').textContent = `Score: ${score}`;
+            document.getElementById('rounds-left').textContent = `Rounds left: ${maxRounds - round}`;
 
             // Select a random word
             const wordIndex = Math.floor(Math.random() * wordList.length);
@@ -99,6 +102,8 @@
             } else {
                 selectedDiv.classList.add('wrong');
             }
+
+            round++;
 
             setTimeout(() => {
                 startRound();
