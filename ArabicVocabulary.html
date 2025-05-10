@@ -24,7 +24,32 @@
         <div id="unit"></div>
         <div id="descriptions"></div>
     </div>
-    <div id="game-over" style="display:none;"></div>
+    <div id="game-over" style="display:none;">
+        <h2>המשחק נגמר!</h2>
+        <table class="score-table">
+            <tr>
+                <th></th>
+                <th>נקודות</th>
+            </tr>
+            <tr>
+                <td>סיבובים רגילים</td>
+                <td id="game-over-good-score">0</td>
+            </tr>
+            <tr>
+                <td>סיבובי תיקון</td>
+                <td id="game-over-extra-score">0</td>
+            </tr>
+            <tr class="total-row">
+                <td>סה"כ</td>
+                <td id="game-over-total-score">0</td>
+            </tr>
+        </table>
+        <h2>מילים שלא הצלחת</h2>
+        <table class="failed-words-table">
+            <tbody id="game-over-failed-words">
+            </tbody>
+        </table>
+    </div>
 
     <script src="words.js"></script>
     <script src="script.js"></script>

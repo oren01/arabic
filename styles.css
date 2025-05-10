@@ -110,4 +110,83 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(18px);
+}
+
+.score-table {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.score-table th,
+.score-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.score-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.score-table .total-row {
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
+.failed-words {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff3f3;
+    border-radius: 5px;
+    text-align: right;
+}
+
+#game-over {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#game-over h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.failed-words-table {
+    font-size: 16px;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    text-align: right;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.failed-words-table th,
+.failed-words-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.failed-words-table th {
+    background-color: #f5f5f5;
+    font-weight: normal;
+}
+
+.failed-words-table tr:nth-child(even) {
+    background-color: #fff3f3;
+}
+
+.failed-words-table tr:hover {
+    background-color: #ffe8e8;
 } 
