@@ -1,6 +1,6 @@
 let score = 0;
 let round = 0;
-const maxRounds = 3;
+const maxRounds = 10;
 let failedWords = [];
 let isExtraRound = false;
 let extraRoundScore = 0;
