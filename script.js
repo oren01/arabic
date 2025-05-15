@@ -50,10 +50,12 @@ function startRound() {
 
     // Get filtered word list based on enabled units
     const filteredWordList = getFilteredWordList();
+    /*
     if (filteredWordList.length === 0) {
         alert('אנא בחר לפחות יחידה אחת');
         return;
     }
+    */
 
     // Select a random word from filtered list
     const wordIndex = Math.floor(Math.random() * filteredWordList.length);
@@ -224,4 +226,21 @@ function displayFinalScore() {
 }
 
 // Start the game when the page loads
-document.addEventListener('DOMContentLoaded', startRound); 
+document.addEventListener('DOMContentLoaded', () => {
+    // Add event listeners for unit toggles
+    const unitToggles = ['unit1Toggle', 'unit2Toggle', 'unit3Toggle'];
+    unitToggles.forEach(toggleId => {
+        document.getElementById(toggleId).addEventListener('change', handleUnitToggle);
+    });
+    
+    startRound();
+});
+
+function handleUnitToggle(event) {
+    const enabledUnits = getEnabledUnits();
+    if (enabledUnits.length === 0) {
+        // Prevent disabling the last unit
+        event.target.checked = true;
+        alert('חובה לבחור לפחות יחידה אחת');
+    }
+} 
