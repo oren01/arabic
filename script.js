@@ -6,6 +6,19 @@ let isExtraRound = false;
 let extraRoundScore = 0;
 let finalFailedWords = [];
 
+function getEnabledUnits() {
+    const enabledUnits = [];
+    if (document.getElementById('unit1Toggle').checked) enabledUnits.push(1);
+    if (document.getElementById('unit2Toggle').checked) enabledUnits.push(2);
+    if (document.getElementById('unit3Toggle').checked) enabledUnits.push(3);
+    return enabledUnits;
+}
+
+function getFilteredWordList() {
+    const enabledUnits = getEnabledUnits();
+    return wordList.filter(word => enabledUnits.includes(word.unit));
+}
+
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -20,7 +33,6 @@ function startRound() {
             // Start extra rounds with failed words
             isExtraRound = true;
             round = 0;
-            //score = 0;
             document.getElementById('game').style.display = 'block';
             document.getElementById('game-over').style.display = 'none';
             startExtraRound();
@@ -36,14 +48,21 @@ function startRound() {
     document.getElementById('score').textContent = `${score} נקודות`;
     document.getElementById('rounds-left').textContent = `עוד ${maxRounds - round} סיבובים`;
 
-    // Select a random word
-    const wordIndex = Math.floor(Math.random() * wordList.length);
-    const currentWord = wordList[wordIndex];
+    // Get filtered word list based on enabled units
+    const filteredWordList = getFilteredWordList();
+    if (filteredWordList.length === 0) {
+        alert('אנא בחר לפחות יחידה אחת');
+        return;
+    }
+
+    // Select a random word from filtered list
+    const wordIndex = Math.floor(Math.random() * filteredWordList.length);
+    const currentWord = filteredWordList[wordIndex];
     document.getElementById('word').textContent = currentWord.word;
     document.getElementById('unit').textContent = `(מיחידה ${currentWord.unit})`;
 
     // Prepare descriptions: one correct + 9 random incorrect
-    let descriptions = wordList.filter((_, i) => i !== wordIndex).map(item => item.description);
+    let descriptions = filteredWordList.filter((_, i) => i !== wordIndex).map(item => item.description);
     descriptions = shuffle(descriptions).slice(0, 9);
     descriptions.push(currentWord.description);
     descriptions = shuffle(descriptions);
@@ -91,8 +110,11 @@ function startExtraRound() {
     document.getElementById('word').textContent = currentWord.word;
     document.getElementById('unit').textContent = `(מיחידה ${currentWord.unit})`;
 
+    // Get filtered word list for incorrect options
+    const filteredWordList = getFilteredWordList();
+    
     // Prepare descriptions: one correct + 9 random incorrect
-    let descriptions = wordList.filter(item => item.word !== currentWord.word).map(item => item.description);
+    let descriptions = filteredWordList.filter(item => item.word !== currentWord.word).map(item => item.description);
     descriptions = shuffle(descriptions).slice(0, 9);
     descriptions.push(currentWord.description);
     descriptions = shuffle(descriptions);
