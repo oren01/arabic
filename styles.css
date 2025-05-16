@@ -243,8 +243,8 @@ input:checked + .slider:before {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
-    padding: 8px 0;
+    margin-bottom: 0px;
+    padding: 4px 0;
 }
 
 .setting label {
