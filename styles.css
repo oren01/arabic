@@ -253,11 +253,17 @@ input:checked + .slider:before {
 }
 
 .setting input[type="number"] {
-    width: 80px;
-    padding: 8px;
-    border: 1px solid #ddd;
+    width: 60px;
+    padding: 4px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    text-align: center;
+}
+
+.setting input[type="number"]:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
 }
 
 .start-button {

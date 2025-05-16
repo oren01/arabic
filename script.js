@@ -122,10 +122,10 @@ function startRound() {
         descriptionsDiv.appendChild(div);
     });
 
-    // Show descriptions based on toggle state
-    const delayToggle = document.getElementById('delayToggle');
-    if (delayToggle.checked) {
-        animateProgressBar(3000);
+    // Show descriptions based on delay setting
+    const delaySeconds = parseFloat(document.getElementById('delaySeconds').value) * 1000;
+    if (delaySeconds > 0) {
+        animateProgressBar(delaySeconds);
         skipWaitingListener = (e) => {
             e.stopPropagation();
             showDescriptionsImmediately(descriptionsDiv);
@@ -133,7 +133,7 @@ function startRound() {
         document.addEventListener('click', skipWaitingListener, true);
         showDescriptionsTimeout = setTimeout(() => {
             showDescriptionsImmediately(descriptionsDiv);
-        }, 3000);
+        }, delaySeconds);
     } else {
         hideProgressBar();
         const descriptionElements = descriptionsDiv.getElementsByClassName('description');
@@ -178,10 +178,10 @@ function startExtraRound() {
         descriptionsDiv.appendChild(div);
     });
 
-    // Show descriptions based on toggle state
-    const delayToggle = document.getElementById('delayToggle');
-    if (delayToggle.checked) {
-        animateProgressBar(3000);
+    // Show descriptions based on delay setting
+    const delaySeconds = parseFloat(document.getElementById('delaySeconds').value) * 1000;
+    if (delaySeconds > 0) {
+        animateProgressBar(delaySeconds);
         skipWaitingListener = (e) => {
             e.stopPropagation();
             showDescriptionsImmediately(descriptionsDiv);
@@ -189,7 +189,7 @@ function startExtraRound() {
         document.addEventListener('click', skipWaitingListener, true);
         showDescriptionsTimeout = setTimeout(() => {
             showDescriptionsImmediately(descriptionsDiv);
-        }, 3000);
+        }, delaySeconds);
     } else {
         hideProgressBar();
         const descriptionElements = descriptionsDiv.getElementsByClassName('description');
