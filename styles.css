@@ -281,15 +281,24 @@ input:checked + .slider:before {
     width: 80%;
     max-width: 400px;
     height: 20px;
-    background-color: #f0f0f0;
     border-radius: 10px;
+    background-color: #777777;
     margin: 20px auto;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 #progress-bar {
     width: 0%;
     height: 100%;
+    border-radius: 10px;
     background-color: #4CAF50;
     transition: width 0.1s linear;
+}
+
+#progress-text {
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+
+
 }
