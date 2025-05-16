@@ -5,6 +5,8 @@ let failedWords = [];
 let isExtraRound = false;
 let extraRoundScore = 0;
 let finalFailedWords = [];
+let showDescriptionsTimeout = null;
+let skipWaitingListener = null;
 
 function getEnabledUnits() {
     const enabledUnits = [];
@@ -25,6 +27,46 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+function animateProgressBar(duration) {
+    const progressContainer = document.getElementById('progress-container');
+    const progressBar = document.getElementById('progress-bar');
+    progressContainer.style.display = 'block';
+    progressBar.style.width = '0%';
+    let start = null;
+    function step(timestamp) {
+        if (!start) start = timestamp;
+        const elapsed = timestamp - start;
+        const percent = Math.min((elapsed / duration) * 100, 100);
+        progressBar.style.width = percent + '%';
+        if (elapsed < duration) {
+            requestAnimationFrame(step);
+        } else {
+            progressBar.style.width = '100%';
+        }
+    }
+    requestAnimationFrame(step);
+}
+
+function hideProgressBar() {
+    document.getElementById('progress-container').style.display = 'none';
+}
+
+function showDescriptionsImmediately(descriptionsDiv) {
+    if (showDescriptionsTimeout) {
+        clearTimeout(showDescriptionsTimeout);
+        showDescriptionsTimeout = null;
+    }
+    hideProgressBar();
+    const descriptionElements = descriptionsDiv.getElementsByClassName('description');
+    for (let element of descriptionElements) {
+        element.classList.add('visible');
+    }
+    if (skipWaitingListener) {
+        document.removeEventListener('click', skipWaitingListener, true);
+        skipWaitingListener = null;
+    }
 }
 
 function startRound() {
@@ -83,13 +125,17 @@ function startRound() {
     // Show descriptions based on toggle state
     const delayToggle = document.getElementById('delayToggle');
     if (delayToggle.checked) {
-        setTimeout(() => {
-            const descriptionElements = descriptionsDiv.getElementsByClassName('description');
-            for (let element of descriptionElements) {
-                element.classList.add('visible');
-            }
+        animateProgressBar(3000);
+        skipWaitingListener = (e) => {
+            e.stopPropagation();
+            showDescriptionsImmediately(descriptionsDiv);
+        };
+        document.addEventListener('click', skipWaitingListener, true);
+        showDescriptionsTimeout = setTimeout(() => {
+            showDescriptionsImmediately(descriptionsDiv);
         }, 3000);
     } else {
+        hideProgressBar();
         const descriptionElements = descriptionsDiv.getElementsByClassName('description');
         for (let element of descriptionElements) {
             element.classList.add('visible');
@@ -135,13 +181,17 @@ function startExtraRound() {
     // Show descriptions based on toggle state
     const delayToggle = document.getElementById('delayToggle');
     if (delayToggle.checked) {
-        setTimeout(() => {
-            const descriptionElements = descriptionsDiv.getElementsByClassName('description');
-            for (let element of descriptionElements) {
-                element.classList.add('visible');
-            }
+        animateProgressBar(3000);
+        skipWaitingListener = (e) => {
+            e.stopPropagation();
+            showDescriptionsImmediately(descriptionsDiv);
+        };
+        document.addEventListener('click', skipWaitingListener, true);
+        showDescriptionsTimeout = setTimeout(() => {
+            showDescriptionsImmediately(descriptionsDiv);
         }, 3000);
     } else {
+        hideProgressBar();
         const descriptionElements = descriptionsDiv.getElementsByClassName('description');
         for (let element of descriptionElements) {
             element.classList.add('visible');
