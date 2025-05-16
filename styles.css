@@ -308,3 +308,10 @@ input:checked + .slider:before {
 
 
 }
+
+#seconds-left {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 5px;
+    color: #666;
+}

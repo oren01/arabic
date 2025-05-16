@@ -32,6 +32,7 @@ function shuffle(array) {
 function animateProgressBar(duration) {
     const progressContainer = document.getElementById('progress-container');
     const progressBar = document.getElementById('progress-bar');
+    const secondsLeft = document.getElementById('seconds-left');
     progressContainer.style.display = 'block';
     progressBar.style.width = '0%';
     let start = null;
@@ -40,17 +41,26 @@ function animateProgressBar(duration) {
         const elapsed = timestamp - start;
         const percent = Math.min((elapsed / duration) * 100, 100);
         progressBar.style.width = percent + '%';
+        
+        // Update seconds display
+        const remainingSeconds = Math.ceil((duration - elapsed) / 1000);
+        secondsLeft.textContent = `${remainingSeconds} שניות`;
+        
         if (elapsed < duration) {
             requestAnimationFrame(step);
         } else {
             progressBar.style.width = '100%';
+            secondsLeft.textContent = '0 שניות';
         }
     }
     requestAnimationFrame(step);
 }
 
 function hideProgressBar() {
-    document.getElementById('progress-container').style.display = 'none';
+    const progressContainer = document.getElementById('progress-container');
+    const secondsLeft = document.getElementById('seconds-left');
+    progressContainer.style.display = 'none';
+    secondsLeft.textContent = '';
 }
 
 function showDescriptionsImmediately(descriptionsDiv) {
