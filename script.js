@@ -1,6 +1,6 @@
 let score = 0;
 let round = 0;
-const maxRounds = 10;
+let maxRounds = 10;
 let failedWords = [];
 let isExtraRound = false;
 let extraRoundScore = 0;
@@ -209,6 +209,41 @@ function handleExtraRoundClick(selectedDiv, selectedDesc, correctDesc) {
     }, selectedDesc === correctDesc ? 500 : 3000);
 }
 
+function startGame() {
+    // Get the number of rounds from the input
+    const roundsInput = document.getElementById('rounds');
+    maxRounds = parseInt(roundsInput.value);
+    
+    // Validate input
+    if (isNaN(maxRounds) || maxRounds < 1 || maxRounds > 100) {
+        alert('אנא הכנס מספר סיבובים תקין (1-100)');
+        return;
+    }
+
+    // Reset game state
+    score = 0;
+    round = 0;
+    failedWords = [];
+    isExtraRound = false;
+    extraRoundScore = 0;
+    finalFailedWords = [];
+
+    // Hide start page and show game
+    document.getElementById('start-page').style.display = 'none';
+    document.getElementById('game').style.display = 'block';
+    document.getElementById('game-over').style.display = 'none';
+
+    // Start the first round
+    startRound();
+}
+
+function restartGame() {
+    // Show start page and hide game/game over
+    document.getElementById('start-page').style.display = 'block';
+    document.getElementById('game').style.display = 'none';
+    document.getElementById('game-over').style.display = 'none';
+}
+
 function displayFinalScore() {
     let failedWords = ``;
         
@@ -225,7 +260,7 @@ function displayFinalScore() {
     document.getElementById('game-over').style.display = 'block';
 }
 
-// Start the game when the page loads
+// Initialize the game when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     // Add event listeners for unit toggles
     const unitToggles = ['unit1Toggle', 'unit2Toggle', 'unit3Toggle'];
@@ -233,7 +268,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById(toggleId).addEventListener('change', handleUnitToggle);
     });
     
-    startRound();
+    // Add event listener for start button
+    document.getElementById('start-game').addEventListener('click', startGame);
+    
+    // Add event listener for restart button in game over screen
+    const gameOverDiv = document.getElementById('game-over');
+    const restartButton = document.createElement('button');
+    restartButton.textContent = 'משחק חדש';
+    restartButton.className = 'start-button';
+    restartButton.onclick = restartGame;
+    gameOverDiv.appendChild(restartButton);
 });
 
 function handleUnitToggle(event) {

@@ -8,37 +8,52 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="switch-container">
-        <div>
-            <span>השהיית תיאורים</span>
-            <label class="switch">
-                <input type="checkbox" id="delayToggle" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div>
-            <span>יחידה 1</span>
-            <label class="switch">
-                <input type="checkbox" id="unit1Toggle" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div>
-            <span>יחידה 2</span>
-            <label class="switch">
-                <input type="checkbox" id="unit2Toggle" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div>
-            <span>יחידה 3</span>
-            <label class="switch">
-                <input type="checkbox" id="unit3Toggle" checked>
-                <span class="slider"></span>
-            </label>
+    <div id="start-page">
+        <h1>משחק אוצר מילים</h1>
+        <div class="settings-container">
+            <div class="setting-group">
+                <h3>הגדרות משחק</h3>
+                <div class="setting">
+                    <label for="rounds">מספר סיבובים:</label>
+                    <input type="number" id="rounds" min="1" max="100" value="10">
+                </div>
+            </div>
+            <div class="setting-group">
+                <h3>הגדרות תוכן</h3>
+                <div class="setting">
+                    <label for="delayToggle">השהיית תיאורים</label>
+                    <label class="switch">
+                        <input type="checkbox" id="delayToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting">
+                    <label for="unit1Toggle">יחידה 1</label>
+                    <label class="switch">
+                        <input type="checkbox" id="unit1Toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting">
+                    <label for="unit2Toggle">יחידה 2</label>
+                    <label class="switch">
+                        <input type="checkbox" id="unit2Toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting">
+                    <label for="unit3Toggle">יחידה 3</label>
+                    <label class="switch">
+                        <input type="checkbox" id="unit3Toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <button id="start-game" class="start-button">התחל משחק</button>
         </div>
     </div>
-    <div id="game">
+
+    <div id="game" style="display:none;">
         <div>
             <span id="score"></span>
             <span id="rounds-left"></span>
