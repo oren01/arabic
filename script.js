@@ -114,7 +114,7 @@ function startRound() {
     const wordIndex = Math.floor(Math.random() * filteredWordList.length);
     const currentWord = filteredWordList[wordIndex];
     document.getElementById('word').textContent = currentWord.word;
-    document.getElementById('unit').textContent = `(מיחידה ${currentWord.unit})`;
+    document.getElementById('unit').textContent = `(יחידה ${currentWord.unit})`;
 
     // Prepare descriptions: one correct + 9 random incorrect
     let descriptions = filteredWordList.filter((_, i) => i !== wordIndex).map(item => item.description);
