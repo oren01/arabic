@@ -59,18 +59,20 @@
     </div>
 
     <div id="game" style="display:none;">
-        <div>
+        <div class="game-header">
             <span id="score"></span>
             <span id="rounds-left"></span>
         </div>
-        <div id="word"></div>
-        <div id="unit"></div>
+        <div class="word-container">
+            <div id="word" class="main-word"></div>
+            <div id="unit" class="unit-label"></div>
+        </div>
         <div id="progress-container" style="display: none;">
             <div id="progress-bar"></div>
             <div id="progress-text">לחץ כדי להציג את האפשרויות מייד</div>
             <div id="seconds-left"></div>
         </div>
-        <div id="descriptions"></div>
+        <div id="descriptions" class="descriptions-container"></div>
     </div>
     <div id="game-over" style="display:none;">
         <h2>המשחק נגמר!</h2>

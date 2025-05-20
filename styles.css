@@ -315,3 +315,48 @@ input:checked + .slider:before {
     margin-top: 5px;
     color: #666;
 }
+
+#game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.game-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.word-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 0;
+}
+
+.main-word {
+    font-size: 2.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.unit-label {
+    font-size: 1.2em;
+    color: #666;
+    text-align: left;
+}
+
+.descriptions-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
