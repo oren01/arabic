@@ -13,6 +13,7 @@ function getEnabledUnits() {
     if (document.getElementById('unit1Toggle').checked) enabledUnits.push(1);
     if (document.getElementById('unit2Toggle').checked) enabledUnits.push(2);
     if (document.getElementById('unit3Toggle').checked) enabledUnits.push(3);
+    if (document.getElementById('unit4Toggle').checked) enabledUnits.push(4);
     return enabledUnits;
 }
 
