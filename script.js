@@ -117,9 +117,12 @@ function startRound() {
     document.getElementById('word').textContent = currentWord.word;
     document.getElementById('unit').textContent = `(יחידה ${currentWord.unit})`;
 
-    // Prepare descriptions: one correct + 9 random incorrect
+    // Get number of answers from settings
+    const numAnswers = parseInt(document.getElementById('numAnswers').value);
+    
+    // Prepare descriptions: one correct + (numAnswers-1) random incorrect
     let descriptions = filteredWordList.filter((_, i) => i !== wordIndex).map(item => item.description);
-    descriptions = shuffle(descriptions).slice(0, 9);
+    descriptions = shuffle(descriptions).slice(0, numAnswers - 1);
     descriptions.push(currentWord.description);
     descriptions = shuffle(descriptions);
 
@@ -173,9 +176,12 @@ function startExtraRound() {
     // Get filtered word list for incorrect options
     const filteredWordList = getFilteredWordList();
     
-    // Prepare descriptions: one correct + 9 random incorrect
+    // Get number of answers from settings
+    const numAnswers = parseInt(document.getElementById('numAnswers').value);
+    
+    // Prepare descriptions: one correct + (numAnswers-1) random incorrect
     let descriptions = filteredWordList.filter(item => item.word !== currentWord.word).map(item => item.description);
-    descriptions = shuffle(descriptions).slice(0, 9);
+    descriptions = shuffle(descriptions).slice(0, numAnswers - 1);
     descriptions.push(currentWord.description);
     descriptions = shuffle(descriptions);
 
