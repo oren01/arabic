@@ -14,6 +14,7 @@ function getEnabledUnits() {
     if (document.getElementById('unit2Toggle').checked) enabledUnits.push(2);
     if (document.getElementById('unit3Toggle').checked) enabledUnits.push(3);
     if (document.getElementById('unit4Toggle').checked) enabledUnits.push(4);
+    if (document.getElementById('unit5Toggle').checked) enabledUnits.push(5);
     return enabledUnits;
 }
 
@@ -324,7 +325,7 @@ function displayFinalScore() {
 // Initialize the game when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     // Add event listeners for unit toggles
-    const unitToggles = ['unit1Toggle', 'unit2Toggle', 'unit3Toggle'];
+    const unitToggles = ['unit1Toggle', 'unit2Toggle', 'unit3Toggle', 'unit4Toggle', 'unit5Toggle'];
     unitToggles.forEach(toggleId => {
         document.getElementById(toggleId).addEventListener('change', handleUnitToggle);
     });
