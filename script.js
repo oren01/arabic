@@ -7,6 +7,7 @@ let extraRoundScore = 0;
 let finalFailedWords = [];
 let showDescriptionsTimeout = null;
 let skipWaitingListener = null;
+let usedWords = []; // Track words used in current game
 
 function getEnabledUnits() {
     const enabledUnits = [];
@@ -104,16 +105,23 @@ function startRound() {
 
     // Get filtered word list based on enabled units
     const filteredWordList = getFilteredWordList();
-    /*
-    if (filteredWordList.length === 0) {
-        alert('אנא בחר לפחות יחידה אחת');
-        return;
+    
+    // Filter out already used words
+    const availableWords = filteredWordList.filter(word => !usedWords.includes(word.word));
+    
+    // If we've used all available words, reset the used words list
+    if (availableWords.length === 0) {
+        usedWords = [];
+        availableWords.push(...filteredWordList);
     }
-    */
 
-    // Select a random word from filtered list
-    const wordIndex = Math.floor(Math.random() * filteredWordList.length);
-    const currentWord = filteredWordList[wordIndex];
+    // Select a random word from available words
+    const wordIndex = Math.floor(Math.random() * availableWords.length);
+    const currentWord = availableWords[wordIndex];
+    
+    // Add the word to used words list
+    usedWords.push(currentWord.word);
+    
     document.getElementById('word').textContent = currentWord.word;
     document.getElementById('unit').textContent = `(יחידה ${currentWord.unit})`;
 
@@ -295,6 +303,7 @@ function startGame() {
     isExtraRound = false;
     extraRoundScore = 0;
     finalFailedWords = [];
+    usedWords = []; // Reset used words list
 
     // Hide start page and show game
     document.getElementById('start-page').style.display = 'none';
